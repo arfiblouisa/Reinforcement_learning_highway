@@ -1,0 +1,7 @@
+numpy
+torch
+highway-env
+stable-baselines3[extra]
+matplotlib
+gymnasium
+tqdm
