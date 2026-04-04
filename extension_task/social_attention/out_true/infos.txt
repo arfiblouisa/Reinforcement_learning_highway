@@ -1,0 +1,3 @@
+run_20260403-084807_17920 : fonctionne très bien pour la config à 3 voies
+
+run_20260403-095139_39712 : fonctionne très bien pour la config à 4 voies ! Densité = 2. La config est dans le fichier

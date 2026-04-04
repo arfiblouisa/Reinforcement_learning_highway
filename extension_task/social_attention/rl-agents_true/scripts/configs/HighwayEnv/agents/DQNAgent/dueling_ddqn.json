@@ -1,0 +1,15 @@
+{
+    "base_config": "C:/Users/louis/Documents/3A/RL Apprentissage par Renforcement/projet_rl/Reinforcement_learning_highway/extension_task/rl-agents/scripts/configs/HighwayEnv/agents/DQNAgent/ddqn.json",
+    "model": {
+        "type": "DuelingNetwork",
+        "base_module": {
+            "layers": [256, 256]
+        },
+        "value": {
+            "layers": []
+        },
+        "advantage": {
+            "layers": []
+        }
+    }
+}
