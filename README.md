@@ -35,7 +35,9 @@ Rappeler la config
 
 ## Results and Conclusions
 
-## Authors
+This repository was created and equally contributed to by :
+- Louisa Arfib : [https://github.com/arfiblouisa](https://github.com/arfiblouisa)
+- Manon Arfib : [https://github.com/manonarfib](https://github.com/manonarfib)
+- Florian De Boni : [https://github.com/FlorianDeBoni](https://github.com/FlorianDeBoni)
+- Nathan Morin : [https://github.com/Nathan9842](https://github.com/Nathan9842)
 
-Louisa Arfib, Manon Arfib, Florian De Boni, Nathan Morin  
-All authors contributed equally to this work.
