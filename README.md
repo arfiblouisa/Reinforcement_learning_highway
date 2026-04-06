@@ -74,24 +74,37 @@ The configuration used to train and test the networks is partly:
 
 ### 2.2 Social attention network
 
-The full configuration used to train the network can be used in *extension_task\social_attention\rl-agents\scripts\configs\HighwayEnv\env_obs_attention_with_traffic.json*. The *ego architecture* described in [Leurent and Mercat, 2019](https://arxiv.org/abs/1911.12250) is used. Therefore a state consists of :  
+The full configuration used to train the network can be found in  
+*`extension_task/social_attention/rl-agents/scripts/configs/HighwayEnv/env_obs_attention_with_traffic.json`*.
+
+The *ego architecture* described in [Leurent and Mercat, 2019](https://arxiv.org/abs/1911.12250) is used.
+
+Therefore, a state consists of:
+
 $$
-s = (s_i){i \in [0, N]}, \quad \text{where} \quad
-s_i = \begin{bmatrix}
-x_i \
-y_i \
-v{x,i} \
-v_{y,i} \
-\cos(\theta_i) \
+s = (s_i)_{i \in [0, N]}, \quad \text{where} \quad
+s_i =
+\begin{bmatrix}
+x_i \\
+y_i \\
+v_{x,i} \\
+v_{y,i} \\
+\cos(\theta_i) \\
 \sin(\theta_i)
 \end{bmatrix}
 $$
-with $s_0$ the state of the controled vehicle, and N the number of vehicles that the ego vehicle can see (we chose 15 in this simulation). Two attention heads were chosen, they can be visualized during the inference. A simulation example obtained with our trained model is represented below :
+
+with $s_0$ the state of the controlled vehicle, and $N$ the number of vehicles that the ego vehicle can see (we chose 15 in this simulation).
+
+Two attention heads were used; they can be visualized during inference.
+
+A simulation example obtained with our trained model is shown below:
 
 <p align="center">
-  <img src="extension_task/social_attention/runs/videos/rl-video-episode-4.mp4" width="400">
+  <video width="400" controls>
+    <source src="extension_task/social_attention/runs/videos/rl-video-episode-4.mp4" type="video/mp4">
+  </video>
 </p>
-
 
 
 ## Results and Conclusions
