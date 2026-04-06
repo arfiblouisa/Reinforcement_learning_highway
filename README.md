@@ -101,9 +101,7 @@ Two attention heads were used; they can be visualized during inference.
 A simulation example obtained with our trained model is shown below:
 
 <p align="center">
-  <video width="400" controls>
-    <source src="extension_task/social_attention/runs/videos/rl-video-episode-4.mp4" type="video/mp4">
-  </video>
+  <img src="extension_task/social_attention/runs/videos/demo_results_attention.gif" width="400">
 </p>
 
 
