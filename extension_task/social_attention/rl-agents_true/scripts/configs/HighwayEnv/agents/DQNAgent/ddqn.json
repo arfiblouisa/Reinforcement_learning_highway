@@ -1,4 +1,0 @@
-{
-    "base_config": "C:/Users/louis/Documents/3A/RL Apprentissage par Renforcement/projet_rl/Reinforcement_learning_highway/extension_task/rl-agents/scripts/configs/HighwayEnv/agents/DQNAgent/dqn.json",
-    "double": true
-}

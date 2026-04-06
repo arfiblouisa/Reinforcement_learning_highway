@@ -150,6 +150,7 @@ class Evaluation(object):
             self.agent.eval()
         except AttributeError:
             pass
+        print(self.agent.exploration_policy)
         self.run_episodes_test()
         self.close()
 
@@ -177,67 +178,6 @@ class Evaluation(object):
             duration = time.time() - start_time
             self.after_all_episodes(self.episode, rewards, duration)
             self.after_some_episodes(self.episode, rewards)
-
-
-    # def run_episodes_train(self):
-
-    #     episode_rewards = []
-    #     episode_lengths = []
-    #     all_losses = []
-    #     epsilons = []
-    #     losses_steps = []
-    #     returns = []
-
-    #     eval_steps, eval_reward_means, eval_reward_stds = [], [], []
-    #     eval_length_means, eval_length_std = [], []
-
-    #     for self.episode in range(self.num_episodes):
-    #         # Run episode
-    #         terminal = False
-    #         self.reset(seed=self.episode)
-    #         rewards = []
-    #         start_time = time.time()
-    #         while not terminal:
-    #             # Step until a terminal step is reached
-    #             reward, terminal = self.step()
-    #             rewards.append(reward)
-
-    #             if hasattr(self.agent, 'loss'):
-    #                 all_losses.append(self.agent.loss)
-    #                 losses_steps.append(self.episode)
-
-    #             # Catch interruptions
-    #             try:
-    #                 if self.env.unwrapped.done:
-    #                     break
-    #             except AttributeError:
-    #                 pass
-
-    #             if hasattr(self.agent, 'exploration_policy'):
-    #                 epsilons.append(self.agent.exploration_policy.epsilon)
-
-    #         # End of episode
-    #         duration = time.time() - start_time
-    #         total_reward = sum(rewards)
-    #         episode_rewards.append(total_reward)
-    #         episode_lengths.append(len(rewards))
-    #         gamma = self.agent.config.get("gamma", 1)
-    #         returns.append(sum(r*gamma**t for t, r in enumerate(rewards)))
-    #         self.after_all_episodes(self.episode, rewards, duration)
-    #         self.after_some_episodes(self.episode, rewards)
-
-    #     return (
-    #         episode_rewards, 
-    #         all_losses, 
-    #         losses_steps,
-    #         eval_steps, 
-    #         eval_reward_means, 
-    #         eval_reward_stds, 
-    #         episode_lengths, 
-    #         eval_length_means, 
-    #         eval_length_std, 
-    #         epsilons, returns
-    #     )
 
     def run_episodes_train(self, eval_interval=50, eval_episodes=10):
         episode_rewards, episode_lengths = [], []
@@ -392,12 +332,15 @@ class Evaluation(object):
     def load_agent_model(self, model_path):
         if model_path is True:
             model_path = self.directory / self.SAVED_MODELS_FOLDER / "latest.tar"
+            # model_path = self.directory / "run_20260404-171122_28896/checkpoint-729.tar"
+            # model_path = "C:/Users/louis/Documents/3A/RL Apprentissage par Renforcement/projet_rl/Reinforcement_learning_highway/extension_task/social_attention/out_true/run_20260403-095139_39712/checkpoint-best.tar"
         if isinstance(model_path, str):
             model_path = Path(model_path)
             if not model_path.exists():
                 model_path = self.directory / self.SAVED_MODELS_FOLDER / model_path
         try:
             model_path = self.agent.load(filename=model_path)
+            print(f"loading {model_path}")
             if model_path:
                 logger.info("Loaded {} model from {}".format(self.agent.__class__.__name__, model_path))
         except FileNotFoundError:

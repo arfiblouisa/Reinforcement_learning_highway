@@ -1,0 +1,21 @@
+[rl_agents.trainer.evaluation:INFO] Loaded DQNAgent model from out\HighwayEnv\DQNAgent\saved_models\latest.tar
+[rl_agents.trainer.evaluation:INFO] Episode 0 score: 56.4
+[rl_agents.trainer.evaluation:INFO] Episode 1 score: 43.6
+[rl_agents.trainer.evaluation:INFO] Episode 2 score: 56.8
+[rl_agents.trainer.evaluation:INFO] Episode 3 score: 55.7
+[rl_agents.trainer.evaluation:INFO] Episode 4 score: 36.4
+[rl_agents.trainer.evaluation:INFO] Episode 5 score: 21.1
+[rl_agents.trainer.evaluation:INFO] Episode 6 score: 58.7
+[rl_agents.trainer.evaluation:INFO] Episode 7 score: 28.0
+[rl_agents.trainer.evaluation:INFO] Episode 8 score: 54.3
+[rl_agents.trainer.evaluation:INFO] Episode 9 score: 19.9
+[rl_agents.trainer.evaluation:INFO] Episode 10 score: 55.7
+[rl_agents.trainer.evaluation:INFO] Episode 11 score: 26.9
+[rl_agents.trainer.evaluation:INFO] Episode 12 score: 55.0
+[rl_agents.trainer.evaluation:INFO] Episode 13 score: 56.9
+[rl_agents.trainer.evaluation:INFO] Episode 14 score: 23.8
+[rl_agents.trainer.evaluation:INFO] Episode 15 score: 53.6
+[rl_agents.trainer.evaluation:INFO] Episode 16 score: 53.8
+[rl_agents.trainer.evaluation:INFO] Episode 17 score: 39.9
+[rl_agents.trainer.evaluation:INFO] Episode 18 score: 57.4
+[rl_agents.trainer.evaluation:INFO] Episode 19 score: 54.7
