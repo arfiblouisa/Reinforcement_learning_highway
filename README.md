@@ -20,7 +20,33 @@ FAIRE LES REQUIREMENTS !! S'assurer que tourne bien sur eleurent
 
 ### Repository description
 
-## Core task
+This repository is organized as follows:
+
+```text
+Reinforcement_learning_highway/
+├── core_task/
+│   ├── convlstm/                 # Checkpoints for the ConvLSTM model according to the loss used during training
+│   │   ├── advanced_torrential/
+│   │   ├── mse/
+│   │   └── ...
+│   └── unet/                     # Checkpoint for the U-Net model corresponding to training with MSE loss
+│   
+├── extension_task/
+│   ├── extension_reward/
+│   |
+│   └── social_attention/
+│   │   ├── out/                  # Training results of 3 configs. The model in saved_models is used for testing
+│   │   ├── rl-agents/            # code to train a double DQN attention network
+│   │   ├── runs/                 # videos from the testing
+│   │   ├── social_attention.ipynb  # notebook used to run the training and testing pipeline of the social attention network
+│   │   └── ...
+│
+├── requirements.txt      
+├── README.md              
+└── .gitignore
+```
+
+## 1. Core task
 
 Rappeler en quoi ça consiste
 - DQN
@@ -29,9 +55,44 @@ Rappeler en quoi ça consiste
 - random
 - untrained (à voir si on garde)
 
-## Extension task
+## 2. Extension task
 
 Rappeler la config
+
+As explained before, the goal of the extension task is to obtain a safer driving in a dense traffic. The previous policies do not generalize well to dense traffic, as the vehicle crash very quickly. We want to improve the distance traveled by the vehicle. Two different methods were implemented :
+- modifying the rewards to change the conduct style;
+- using the social attention network developed by [Leurent and Mercat, 2019](https://arxiv.org/abs/1911.12250) that is supposed to be adapted to dense traffic.
+
+The configuration used to train and test the networks is partly:
+{
+    "lanes_count": 4,
+    "vehicles_count": 50,
+    "vehicles_density": 2
+}
+
+### 2.1 Changing the rewards
+
+### 2.2 Social attention network
+
+The full configuration used to train the network can be used in *extension_task\social_attention\rl-agents\scripts\configs\HighwayEnv\env_obs_attention_with_traffic.json*. The *ego architecture* described in [Leurent and Mercat, 2019](https://arxiv.org/abs/1911.12250) is used. Therefore a state consists of :  
+$$
+s = (s_i){i \in [0, N]}, \quad \text{where} \quad
+s_i = \begin{bmatrix}
+x_i \
+y_i \
+v{x,i} \
+v_{y,i} \
+\cos(\theta_i) \
+\sin(\theta_i)
+\end{bmatrix}
+$$
+with $s_0$ the state of the controled vehicle, and N the number of vehicles that the ego vehicle can see (we chose 15 in this simulation). Two attention heads were chosen, they can be visualized during the inference. A simulation example obtained with our trained model is represented below :
+
+<p align="center">
+  <img src="extension_task/social_attention/runs/videos/rl-video-episode-4.mp4" width="400">
+</p>
+
+
 
 ## Results and Conclusions
 
