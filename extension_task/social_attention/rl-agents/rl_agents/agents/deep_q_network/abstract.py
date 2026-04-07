@@ -188,6 +188,7 @@ class AbstractDQNAgent(AbstractStochasticAgent, ABC):
         self.training = False
         if hasattr(self, "value_net"):
             self.value_net.eval()
+        print(self.exploration_policy.epsilon)
         # On force la politique actuelle à être Greedy sans la supprimer
         if hasattr(self, "exploration_policy"):
             self.exploration_policy.method = "Greedy"

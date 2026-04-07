@@ -1,5 +1,5 @@
 {
-    "base_config": "C:/Users/louis/Documents/3A/RL Apprentissage par Renforcement/projet_rl/Reinforcement_learning_highway/extension_task/social_attention/rl-agents/scripts/configs/HighwayEnv/agents/DQNAgent/ddqn.json",
+    "base_config": "social_attention/rl-agents/scripts/configs/HighwayEnv/agents/DQNAgent/ddqn.json",
     "model": {
         "type": "EgoAttentionNetwork",
         "embedding_layer": {
