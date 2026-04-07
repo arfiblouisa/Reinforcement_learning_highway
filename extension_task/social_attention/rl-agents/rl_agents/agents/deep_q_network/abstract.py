@@ -188,9 +188,13 @@ class AbstractDQNAgent(AbstractStochasticAgent, ABC):
         self.training = False
         if hasattr(self, "value_net"):
             self.value_net.eval()
+        print(hasattr(self, "exploration_policy"))
         # On force la politique actuelle à être Greedy sans la supprimer
         if hasattr(self, "exploration_policy"):
-            self.exploration_policy.method = "Greedy"
+            # self.exploration_policy.method = "Greedy"
+            # print(self.exploration_policy)
+            self.config['exploration']['method'] = "Greedy"
+            self.exploration_policy = exploration_factory(self.config["exploration"], self.env.action_space)
 
     def train(self, training=True):
         self.training = training
@@ -198,4 +202,6 @@ class AbstractDQNAgent(AbstractStochasticAgent, ABC):
             self.value_net.train(training)
         # On remet la méthode d'exploration d'origine (ex: EpsilonGreedy)
         if hasattr(self, "exploration_policy"):
-            self.exploration_policy.method = self.config["exploration"]["method"]
+            # self.exploration_policy.method = "EpsilonGreedy"
+            self.config['exploration']['method'] = "EpsilonGreedy"
+            self.exploration_policy = exploration_factory(self.config["exploration"], self.env.action_space)
