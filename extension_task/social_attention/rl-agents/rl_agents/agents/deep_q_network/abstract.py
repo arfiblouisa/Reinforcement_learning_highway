@@ -205,4 +205,7 @@ class AbstractDQNAgent(AbstractStochasticAgent, ABC):
             # self.exploration_policy.method = "EpsilonGreedy"
             self.config['exploration']['method'] = "EpsilonGreedy"
             self.exploration_policy = exploration_factory(self.config["exploration"], self.env.action_space)
+            # self.exploration_policy.method = "EpsilonGreedy"
+            self.config['exploration']['method'] = "EpsilonGreedy"
+            self.exploration_policy = exploration_factory(self.config["exploration"], self.env.action_space)
 
