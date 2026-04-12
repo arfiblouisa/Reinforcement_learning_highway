@@ -7,42 +7,8 @@ Mettre des photos/vidéos des simulations et de l'environnement
 
 ## Settings
 
-In order to evaluate and compare our models across this repository as well with our classmates', we are using the same configuration provided in class material. This configuration defines useful elements such as observation, rewards and environment parameters. The configuration used for this project is as follows:
+In order to evaluate and compare our models across this repository as well with our classmates', we are using the same configuration provided in class material. This configuration defines useful elements such as observation, rewards and environment parameters. The configuration is then changed in the extension task in order to reach better results.
 
-```
-SHARED_CORE_ENV_ID = "highway-v0"
-
-SHARED_CORE_CONFIG = {
-    "observation": {
-        "type": "Kinematics",
-        "vehicles_count": 10,
-        "features": ["presence", "x", "y", "vx", "vy"],
-        "absolute": False,
-        "normalize": True,
-        "clip": True,
-        "see_behind": True,
-        "observe_intentions": False,
-    },
-    "action": {
-        "type": "DiscreteMetaAction",
-        "target_speeds": [20, 25, 30],
-    },
-    "lanes_count": 4,
-    "vehicles_count": 45,
-    "controlled_vehicles": 1,
-    "initial_lane_id": None,
-    "duration": 30,
-    "ego_spacing": 2,
-    "vehicles_density": 1.0,
-    "collision_reward": -1.5,
-    "right_lane_reward": 0.0,
-    "high_speed_reward": 0.7,
-    "lane_change_reward": -0.02,
-    "reward_speed_range": [22, 30],
-    "normalize_reward": True,
-    "offroad_terminal": True,
-}
-```
 
 ### Installation
 
@@ -124,6 +90,8 @@ SHARED_CORE_CONFIG = {
 ```
 
 We decided to implement 2 DQN ourselves : one with 1 layer, and another one with 2 layers, a DQN with stable baselines, and a double DQN. In order to compare our models with a baseline, we also implemented a random model (at each time step, a random action among the list of possible actions is chosen). 
+
+The code used for the DQN is based on the code provided in our class material while the one used for the double DQN is based on the one found in this [GitHub repository](https://github.com/eleurent/highway-env).
 
 In the `compare_models.ipynb` notebook, we evaluated each agent on the same configuration. The DQN that we implemented ourselves performs the best on this config, and remarkably never crashes during the 50 evaluation runs. However, when we increase the `vehicles_density` in the config, all the models previously develepod now crash very often and achieve consequently a very low mean reward. That is why we chose to work on an extension task which is trying to obtain a safer driving (with less crashes) in a dense traffic.
 ## 2. Extension task
