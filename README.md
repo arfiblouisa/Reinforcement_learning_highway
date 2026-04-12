@@ -25,11 +25,14 @@ This repository is organized as follows:
 ```text
 Reinforcement_learning_highway/
 ├── core_task/
-│   ├── convlstm/                 # Checkpoints for the ConvLSTM model according to the loss used during training
-│   │   ├── advanced_torrential/
-│   │   ├── mse/
-│   │   └── ...
-│   └── unet/                     # Checkpoint for the U-Net model corresponding to training with MSE loss
+│   ├── Checkpoints/ # Checkpoints for the DQN 1 and 2 layers, and for the DQN trained with stable baselines
+│   ├── Double DQN/  # Notebook for training the double DQN model and checkpoint
+│   ├── DQN 1 Layer/ # Notebook for training a DQN model with 1 layer
+│   ├── DQN 2 Layers/ # Notebook for training a DQN model with 2 layers
+│   ├── Stable baselines/ #Notebook for training a DQN with stable baselines
+│   ├── videos/ # Videos generated in the compare_models file to visualize an episode
+│   └── compare_models.ipynb # Notebook to compare the models trained with the files above
+
 │   
 ├── extension_task/
 │   ├── extension_reward/
@@ -48,16 +51,47 @@ Reinforcement_learning_highway/
 
 ## 1. Core task
 
-Rappeler en quoi ça consiste
-- DQN
-- Stable baseline
-- Double DQN
-- random
-- untrained (à voir si on garde)
+In this part, we train and evaluate different models on the follwoing configuration :
 
+```
+SHARED_CORE_ENV_ID = "highway-v0"
+
+SHARED_CORE_CONFIG = {
+    "observation": {
+        "type": "Kinematics",
+        "vehicles_count": 10,
+        "features": ["presence", "x", "y", "vx", "vy"],
+        "absolute": False,
+        "normalize": True,
+        "clip": True,
+        "see_behind": True,
+        "observe_intentions": False,
+    },
+    "action": {
+        "type": "DiscreteMetaAction",
+        "target_speeds": [20, 25, 30],
+    },
+    "lanes_count": 4,
+    "vehicles_count": 45,
+    "controlled_vehicles": 1,
+    "initial_lane_id": None,
+    "duration": 30,
+    "ego_spacing": 2,
+    "vehicles_density": 1.0,
+    "collision_reward": -1.5,
+    "right_lane_reward": 0.0,
+    "high_speed_reward": 0.7,
+    "lane_change_reward": -0.02,
+    "reward_speed_range": [22, 30],
+    "normalize_reward": True,
+    "offroad_terminal": True,
+}
+```
+
+We decided to implement 2 DQN ourselves : one with 1 layer, and another one with 2 layers, a DQN with stable baselines, and a double DQN. In order to compare our models with a baseline, we also implemented a random model (at each time step, a random action among the list of possible actions is chosen). 
+
+In the `compare_models.ipynb` notebook, we evaluated each agent on the same configuration. The DQN that we implemented ourselves performs the best on this config, and remarkably never crashes during the 50 evaluation runs. However, when we increase the `vehicles_density` in the config, all the models previously develepod now crash very often and achieve consequently a very low mean reward. That is why we chose to work on an extension task which is trying to obtain a safer driving (with less crashes) in a dense traffic.
 ## 2. Extension task
-
-Rappeler la config
 
 As explained before, the goal of the extension task is to obtain a safer driving in a dense traffic. The previous policies do not generalize well to dense traffic, as the vehicle crash very quickly. We want to improve the distance traveled by the vehicle. Two different methods were implemented :
 - modifying the rewards to change the conduct style;
