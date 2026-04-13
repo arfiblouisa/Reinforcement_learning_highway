@@ -139,9 +139,9 @@ To go beyond manual tuning, we implemented a random search to systematically exp
 
 To prioritize safety, we defined a composite selection criterion:
 
-\[
+$$
 \text{Score} = \text{Mean Distance} \times \frac{\text{Success Rate}}{100}
-\]
+$$
 
 The results are discussed in the `compare_models_dense_extension_full.ipynb` file.
 
