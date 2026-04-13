@@ -2,8 +2,7 @@
 
 The aim of this project is to implement different RL techniques to improve the policy of an autonomous car. We used the environment *highway-v0* from *highway_env*, usually used for decision-making in Autonomous Driving. The project is divided into two tasks : a core task, and an extension.  
 
-Expliquer très rapidment le but des core et extension tasks.  
-Mettre des photos/vidéos des simulations et de l'environnement
+The core tasks consists of training and evaluating different RL models on a shared simple configuration. Then we complexify the problem, and want our vehicle to drive in a safe way and therefore not crash in a trafic configuration with a high vehicles density.
 
 ## Settings
 
@@ -17,7 +16,6 @@ Install with pip :
 ```
 pip install requirements.txt
 ```
-FAIRE LES REQUIREMENTS !! S'assurer que tourne bien sur eleurent
 
 ### Repository description
 
