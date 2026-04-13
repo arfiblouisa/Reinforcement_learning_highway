@@ -31,17 +31,25 @@ Reinforcement_learning_highway/
 │   ├── Stable baselines/ #Notebook for training a DQN with stable baselines
 │   ├── videos/ # Videos generated in the compare_models file to visualize an episode
 │   └── compare_models.ipynb # Notebook to compare the models trained with the files above
-
 │   
 ├── extension_task/
 │   ├── extension_reward/
+│   │   ├── checkpoints/                          # chekpoints of the extension task for reward shaping
+│   │   ├── results/                              # results of experiments done in extension task for reward shaping
+│   │   ├── reward_search_dense_random.ipynb      # Notebook for searching the best configuration for reward shaping using randomness
+│   │   ├── training_dqn_extension_reward.ipynb   # Notebook used to train DQN using dense configurations (`density = 2.0`)
+│   │   └── visualise_episode_dqn_extenion.ipynb  # Notebook that allows to visualize an episode using trained DQN
 │   |
-│   └── social_attention/
+│   ├── social_attention/
 │   │   ├── out/                  # Training results of 3 configs. The model in saved_models is used for testing
 │   │   ├── rl-agents/            # code to train a double DQN attention network
 │   │   ├── runs/                 # videos from the testing
 │   │   ├── social_attention.ipynb  # notebook used to run the training and testing pipeline of the social attention network
 │   │   └── ...
+│   │
+│   ├── results/
+│   │
+│   └── compare_models_dense_extension_full.ipynb # Notebook used to compare all configuration of the extension task
 │
 ├── requirements.txt      
 ├── README.md              
@@ -106,6 +114,36 @@ The configuration used to train and test the networks is partly:
 }
 
 ### 2.1 Changing the rewards
+
+To improve the robustness of the DQN in dense traffic, we explored reward shaping strategies aimed at encouraging safer driving behaviors.
+
+#### Manual Reward Configurations
+
+We first evaluated three manually designed reward configurations to study the impact of different safety–efficiency trade-offs:
+
+| Configuration | Collision Reward | High Speed Reward | Lane Change Reward | Description |
+|--------------|-----------------|------------------|-------------------|-------------|
+| `dense_baseline` | -1.5 | 0.7 | -0.02 | Same rewards as the core task, trained in dense traffic |
+| `dense_balanced` | -3.0 | 0.45 | -0.05 | Moderate emphasis on safety |
+| `dense_safety` | -5.0 | 0.25 | -0.08 | Safety-first approach with stronger penalties |
+
+These configurations are implemented in the `training_dqn_extension_reward.ipynb` file.
+
+#### Random Search for Reward Optimization
+
+To go beyond manual tuning, we implemented a random search to systematically explore the reward space in the `reward_search_dense_random.ipynb` file. The following parameters were sampled within predefined ranges:
+
+- `collision_reward ∈ [-10, -1]`
+- `high_speed_reward ∈ [0.05, 0.6]`
+- `lane_change_reward ∈ [-0.15, -0.01]`
+
+To prioritize safety, we defined a composite selection criterion:
+
+\[
+\text{Score} = \text{Mean Distance} \times \frac{\text{Success Rate}}{100}
+\]
+
+The results are discussed in the `compare_models_dense_extension_full.ipynb` file.
 
 ### 2.2 Social attention network
 
