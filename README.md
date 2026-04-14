@@ -180,6 +180,10 @@ A simulation example obtained with our trained model is shown below:
 
 ## Results and Conclusions
 
+All the results are available in the notebooks : `core_task/compare_models.ipynb` and `extension_task/compare_models_dense_extension_full.ipynb`.
+
+## Authors
+
 This repository was created and equally contributed to by :
 - Louisa Arfib : [https://github.com/arfiblouisa](https://github.com/arfiblouisa)
 - Manon Arfib : [https://github.com/manonarfib](https://github.com/manonarfib)
